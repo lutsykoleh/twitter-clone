@@ -1,0 +1,9 @@
+# IDE settings
+.idea
+
+# Environment variables
+.env
+
+# Composer
+/vendor/
+composer.lock

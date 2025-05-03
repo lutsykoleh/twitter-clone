@@ -1,9 +1,9 @@
 <header>
   <nav>
-    <a href="/">Twitter Clone</a>
     <ul>
-      <li><a href="/">Tweets</a></li>
+      <li><a href="/">Home</a></li>
       <?php if (isset($_SESSION['user_id'])): ?>
+        <li><a href="#" id="create-tweet-btn">Create Tweet</a></li>
         <li><a href="/logout">Logout</a></li>
       <?php else: ?>
         <li><a href="/register">Register</a></li>
@@ -11,4 +11,20 @@
       <?php endif; ?>
     </ul>
   </nav>
+
+  <!-- Pop-up form -->
+  <div id="tweet-popup" class="popup">
+    <div class="popup-content">
+      <span id="close-popup" class="close">×</span>
+      <h2>Create Tweet</h2>
+      <form id="tweet-form" method="POST" action="/tweets/create">
+        <div>
+          <label for="content">What's on your mind?</label>
+          <textarea id="content" name="content" required maxlength="280"></textarea>
+          <div id="content-errors" class="validation-errors"></div>
+        </div>
+        <button type="submit">Tweet</button>
+      </form>
+    </div>
+  </div>
 </header>

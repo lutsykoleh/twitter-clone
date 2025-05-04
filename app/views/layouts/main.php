@@ -9,12 +9,14 @@
 </head>
 
 <body>
-  <?php include __DIR__ . '/../partials/header.php'; ?>
-  <main>
-    <?php include $content; ?>
-  </main>
+  <div class="content">
+    <?php include __DIR__ . '/../partials/sidebar.php'; ?>
+    <main>
+      <?php include $content; ?>
+    </main>
+  </div>
   <?php include __DIR__ . '/../partials/footer.php'; ?>
-  <script type="text/javascript" src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 
 </html>

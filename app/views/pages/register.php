@@ -1,11 +1,11 @@
-<section>
+<section class="register">
   <h1>Register</h1>
   <?php if (!empty($errors['general'])): ?>
     <div class="form-error">
       <?php echo htmlspecialchars($errors['general']); ?>
     </div>
   <?php endif; ?>
-  <form method="POST" action="/register">
+  <form method="POST" action="/register" class="register-form">
     <div>
       <label for="username">Username</label>
       <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" required>

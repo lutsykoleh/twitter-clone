@@ -14,10 +14,10 @@
         <?php echo htmlspecialchars($formErrors['general']); ?>
       </div>
     <?php endif; ?>
-    <form method="POST" action="/tweets/create">
-      <div>
+    <form method="POST" action="/tweets/create" class="create-form">
+      <div class="form-field">
         <label for="content">What's on your mind?</label>
-        <textarea id="content" name="content" required maxlength="280"><?php echo htmlspecialchars($_POST['content'] ?? ''); ?></textarea>
+        <textarea id="content" name="content" required maxlength="280" minlength="5"><?php echo htmlspecialchars($_POST['content'] ?? ''); ?></textarea>
         <?php if (isset($validator)): ?>
           <?php echo $validator->listErrors('content'); ?>
         <?php endif; ?>
@@ -27,11 +27,11 @@
   <?php endif; ?>
 
   <!-- List of tweets -->
-  <h1>Tweets</h1>
   <?php if (empty($tweets)): ?>
-    <p>No tweets yet. Be the first!</p>
+    <p class="no-content">No tweets yet. Be the first!</p>
   <?php else: ?>
     <div class="tweets">
+      <h1>Tweets</h1>
       <?php foreach ($tweets as $tweet): ?>
         <div class="tweet">
           <p><strong><?php echo htmlspecialchars($tweet['username']); ?></strong> <small><?php echo $tweet['created_at']; ?></small></p>

@@ -1,4 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 20px auto;
+}
+
 .content {
   display: flex;
   flex-direction: row;
+}
+
+.sidebar {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  height: 95vh;
+}
+.sidebar img.logo {
+  width: 18px;
+  align-items: start;
+}
+.sidebar nav ul {
+  list-style: none;
+}
+.sidebar nav ul li {
+  padding: 10px;
+}
+.sidebar nav ul li a {
+  font-size: 20px;
+  text-decoration: none;
+  color: #0f1419;
+}
+.sidebar nav ul li .btn {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: #0f1419;
+  color: #fff;
+}
+.sidebar .main-nav .menu {
+  margin-top: 50px;
+}
+.sidebar .user-nav {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.popup .popup-content {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+.popup .popup-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.popup .popup-content form {
+  margin: 10px auto 5px;
+}
+.popup .popup-content form input,
+.popup .popup-content form textarea {
+  width: 100%;
+  border: 1px solid #0f1419;
+  border-radius: 7px;
+  resize: none;
+  padding: 10px;
+}
+.popup .popup-content form button {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: #0f1419;
+  color: #fff;
+}
+.popup .popup-content form .form-field {
+  text-align: center;
+}
+.popup .popup-content form button {
+  display: block;
+  margin: 2px 0 0 auto;
+}
+
+.main {
+  flex: 3;
+}
+
+.tweet-menu {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 5px;
+}
+.tweet-menu a {
+  text-decoration: none;
+  color: #657786;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+.tweet-menu a.active {
+  color: #0f1419;
+  border-bottom: 2px solid #0f1419;
+}
+
+.create-form {
+  margin: 10px auto 5px;
+  max-width: 400px;
+}
+.create-form input,
+.create-form textarea {
+  width: 100%;
+  border: 1px solid #0f1419;
+  border-radius: 7px;
+  resize: none;
+  padding: 10px;
+}
+.create-form button {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: #0f1419;
+  color: #fff;
+}
+.create-form .form-field {
+  text-align: center;
+}
+.create-form button {
+  display: block;
+  margin: 2px 0 0 auto;
+}
+
+.form-error {
+  color: #ff0000;
+}
+
+.validation-errors .list-errors {
+  list-style: none;
+}
+.validation-errors .list-errors li {
+  color: #ff0000;
+}
+
+.tweets {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.tweets h1 {
+  margin-bottom: 10px;
+}
+.tweets .tweet {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.tweets .tweet p {
+  margin: 5px 0;
+}
+.tweets .tweet small {
+  color: #666;
+}
+
+.no-content {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.login,
+.register {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login .login-form,
+.login .register-form,
+.register .login-form,
+.register .register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login .login-form input,
+.login .login-form textarea,
+.login .register-form input,
+.login .register-form textarea,
+.register .login-form input,
+.register .login-form textarea,
+.register .register-form input,
+.register .register-form textarea {
+  width: 100%;
+  border: 1px solid #0f1419;
+  border-radius: 7px;
+  resize: none;
+  padding: 10px;
+}
+.login .login-form button,
+.login .register-form button,
+.register .login-form button,
+.register .register-form button {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: #0f1419;
+  color: #fff;
+}
+.login button,
+.register button {
+  width: 100%;
+}
+
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.footer p {
+  margin: 15px auto 5px;
+}
+
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+}
+.error-page a {
+  max-width: fit-content;
+  margin: 0 auto;
+  text-decoration: none;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: #0f1419;
+  color: #fff;
 }

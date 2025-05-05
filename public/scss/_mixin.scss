@@ -1,0 +1,27 @@
+@use 'variables' as variables;
+
+@mixin button {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: variables.$dark;
+  color: variables.$light;
+}
+
+@mixin form {
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid variables.$dark;
+    border-radius: 7px;
+    resize: none;
+    padding: 10px;
+  }
+  button {
+    @include button;
+  }
+}

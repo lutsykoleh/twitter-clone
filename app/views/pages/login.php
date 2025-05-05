@@ -1,11 +1,11 @@
-<section>
+<section class="login">
   <h1>Login</h1>
   <?php if (!empty($formErrors['general'])): ?>
     <div class="form-error">
       <?php echo htmlspecialchars($formErrors['general']); ?>
     </div>
   <?php endif; ?>
-  <form method="POST" action="/login">
+  <form method="POST" action="/login" class="login-form">
     <div>
       <label for="email">Email</label>
       <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" required>

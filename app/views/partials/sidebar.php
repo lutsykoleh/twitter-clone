@@ -1,9 +1,15 @@
 <aside class="sidebar">
-  <nav>
-    <ul>
+  <nav class="main-nav">
+    <img src="/images/icon.svg" alt="Logo" class="logo">
+    <ul class="menu">
       <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+
+  <nav class="user-nav">
+    <ul class="menu">
       <?php if (isset($_SESSION['user_id'])): ?>
-        <li><a href="#" id="create-tweet-btn">Create Tweet</a></li>
+        <li><a href="#" class="btn" id="create-tweet-btn">Create Tweet</a></li>
         <li><a href="/logout">Logout</a></li>
       <?php else: ?>
         <li><a href="/register">Register</a></li>
@@ -20,7 +26,7 @@
       <form id="tweet-form" method="POST" action="/tweets/create">
         <div>
           <label for="content">What's on your mind?</label>
-          <textarea id="content" name="content" required maxlength="280"></textarea>
+          <textarea id="content" name="content" required maxlength="280" minlength="5"></textarea>
           <div id="content-errors" class="validation-errors"></div>
         </div>
         <button type="submit">Tweet</button>

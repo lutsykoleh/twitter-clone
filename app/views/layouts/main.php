@@ -9,13 +9,15 @@
 </head>
 
 <body>
-  <div class="content">
-    <?php include __DIR__ . '/../partials/sidebar.php'; ?>
-    <main>
-      <?php include $content; ?>
-    </main>
+  <div class="container">
+    <div class="content">
+      <?php include __DIR__ . '/../partials/sidebar.php'; ?>
+      <main class="main">
+        <?php include $content; ?>
+      </main>
+    </div>
+    <?php include __DIR__ . '/../partials/footer.php'; ?>
   </div>
-  <?php include __DIR__ . '/../partials/footer.php'; ?>
   <script src="/js/main.js"></script>
 </body>
 

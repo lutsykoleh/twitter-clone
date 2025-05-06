@@ -7,9 +7,7 @@ use App\Middlewares\GuestMiddleware;
 
 return function ($router) {
   $router->get('', [TweetController::class, 'index'], []);
-
-  // Route for user's tweets
-  $router->get('your-tweets', [TweetController::class, 'yourTweets'], [AuthMiddleware::class]);
+  $router->get('tweet/{id}', [TweetController::class, 'show'], []);
 
   // Guest routes (for unauthorized users only)
   $router->get('register', [UserController::class, 'register'], [GuestMiddleware::class]);
@@ -20,4 +18,8 @@ return function ($router) {
   // Protected routes (for authorized users only)
   $router->post('tweets/create', [TweetController::class, 'store'], [AuthMiddleware::class]);
   $router->get('logout', [UserController::class, 'logout'], [AuthMiddleware::class]);
+  $router->get('your-tweets', [TweetController::class, 'yourTweets'], [AuthMiddleware::class]);
+  $router->get('tweets/edit/{id}', [TweetController::class, 'edit'], [AuthMiddleware::class]);
+  $router->post('tweets/edit/{id}', [TweetController::class, 'update'], [AuthMiddleware::class]);
+  $router->post('tweets/delete/{id}', [TweetController::class, 'delete'], [AuthMiddleware::class]);
 };

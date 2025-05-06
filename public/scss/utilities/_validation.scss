@@ -1,0 +1,14 @@
+@use '../variables';
+
+.form-error {
+  color: variables.$red;
+}
+
+.validation-errors {
+  .list-errors {
+    list-style: none;
+    li {
+      color: variables.$red;
+    }
+  }
+}

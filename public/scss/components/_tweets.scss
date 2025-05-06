@@ -1,0 +1,39 @@
+@use '../variables';
+@use '../mixin';
+
+.tweets {
+  border-top: 1px solid variables.$light-dark;
+  border-left: 1px solid variables.$light-dark;
+  padding: 20px;
+
+  h1 {
+    margin-bottom: 10px;
+  }
+  .tweet-link {
+    text-decoration: none;
+    color: variables.$dark;
+  }
+
+  @media (max-width: 768px) {
+    border: none;
+  }
+}
+
+.tweet {
+  border: 1px solid variables.$light-dark;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+
+  p {
+    margin: 5px 0;
+  }
+
+  small {
+    color: variables.$grey;
+  }
+
+  .button {
+    @include mixin.button;
+  }
+}

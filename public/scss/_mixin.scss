@@ -7,9 +7,16 @@
   cursor: pointer;
   transition: all 0.3s ease 0s;
   text-transform: capitalize;
+  font-size: variables.$font-size;
+  text-decoration: none;
   font-weight: bold;
   background-color: variables.$dark;
   color: variables.$light;
+
+  @media (max-width: 768px) {
+    font-size: variables.$font-size-mobile;
+    padding: 5px 15px;
+  }
 }
 
 @mixin form {

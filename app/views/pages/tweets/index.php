@@ -33,10 +33,12 @@
     <div class="tweets">
       <h1>Tweets</h1>
       <?php foreach ($tweets as $tweet): ?>
-        <div class="tweet">
-          <p><strong><?php echo htmlspecialchars($tweet['username']); ?></strong> <small><?php echo $tweet['created_at']; ?></small></p>
-          <p><?php echo htmlspecialchars($tweet['content']); ?></p>
-        </div>
+        <a class="tweet-link" href="/tweet/<?php echo $tweet['id']; ?>">
+          <div class="tweet">
+            <p><strong><?php echo htmlspecialchars($tweet['username']); ?></strong> <small><?php echo $tweet['created_at']; ?></small></p>
+            <p><?php echo htmlspecialchars($tweet['content']); ?></p>
+          </div>
+        </a>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>

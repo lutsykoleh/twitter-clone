@@ -36,7 +36,7 @@ class Tweet
   }
 
   /**
-   * Retrieves all tweets with usernames.
+   * Retrieves all tweets along with usernames.
    *
    * @return array An array of tweets
    */
@@ -65,5 +65,61 @@ class Tweet
                 ORDER BY t.created_at DESC";
     $stmt = $this->db->query($sql, ['user_id' => $userId]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * Retrieves a tweet by its ID.
+   *
+   * @param int $id The ID of the tweet
+   * @return array|null The tweet data or null if not found
+   */
+  public function getById(int $id): ?array
+  {
+    $sql = "SELECT t.id, t.user_id, t.content, t.created_at, u.username 
+            FROM tweets t 
+            JOIN users u ON t.user_id = u.id 
+            WHERE t.id = :id";
+    $stmt = $this->db->query($sql, ['id' => $id]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
+  }
+
+  /** 
+   * Updates the content of a tweet. 
+   * 
+   * @param int $id The ID of the tweet 
+   * @param string $content The new content of the tweet 
+   * @return bool True if the tweet was updated successfully, false otherwise 
+   */
+  public function update(int $id, string $content): bool
+  {
+    $sql = "UPDATE tweets SET content = :content WHERE id = :id";
+    try {
+      $this->db->query($sql, [
+        'id' => $id,
+        'content' => $content
+      ]);
+      return true;
+    } catch (\PDOException $e) {
+      error_log("Error updating tweet: " . $e->getMessage());
+      return false;
+    }
+  }
+
+  /** 
+   * Deletes a tweet by its ID. 
+   * 
+   * @param int $id The ID of the tweet 
+   * @return bool True if the tweet was deleted successfully, false otherwise 
+   */
+  public function delete(int $id): bool
+  {
+    $sql = "DELETE FROM tweets WHERE id = :id";
+    try {
+      $this->db->query($sql, ['id' => $id]);
+      return true;
+    } catch (\PDOException $e) {
+      error_log("Error deleting tweet: " . $e->getMessage());
+      return false;
+    }
   }
 }

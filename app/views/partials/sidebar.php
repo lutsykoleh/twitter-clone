@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
   <nav class="main-nav">
     <img src="/images/icon.svg" alt="Logo" class="logo">
     <ul class="menu">
@@ -9,7 +9,7 @@
   <nav class="user-nav">
     <ul class="menu">
       <?php if (isset($_SESSION['user_id'])): ?>
-        <li><a href="#" class="btn" id="create-tweet-btn">Create Tweet</a></li>
+        <li><a href="#" class="button" id="create-tweet-btn">Create Tweet</a></li>
         <li><a href="/logout">Logout</a></li>
       <?php else: ?>
         <li><a href="/register">Register</a></li>

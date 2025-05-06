@@ -5,14 +5,47 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .container {
   max-width: 1120px;
   margin: 20px auto;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 576px) {
+  .container {
+    padding: 0 10px;
+  }
 }
 
 .content {
   display: flex;
   flex-direction: row;
+  flex: 1 1 auto;
+}
+
+.main {
+  flex: 3;
+}
+@media (max-width: 768px) {
+  .main {
+    margin-top: 26px;
+  }
 }
 
 .sidebar {
@@ -39,16 +72,24 @@
   text-decoration: none;
   color: #0f1419;
 }
-.sidebar nav ul li .btn {
+.sidebar nav ul li .button {
   border: none;
   border-radius: 30px;
   padding: 10px 30px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
   text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
   font-weight: bold;
   background-color: #0f1419;
   color: #fff;
+}
+@media (max-width: 768px) {
+  .sidebar nav ul li .button {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
 }
 .sidebar .main-nav .menu {
   margin-top: 50px;
@@ -56,6 +97,83 @@
 .sidebar .user-nav {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 10px;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    justify-content: center;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    margin-left: 0;
+    border-right: none;
+  }
+  .sidebar.active {
+    left: 0;
+  }
+  .sidebar img.logo {
+    display: none;
+  }
+  .sidebar nav ul li {
+    padding: 15px 20px;
+  }
+  .sidebar nav ul li a,
+  .sidebar nav ul li .button {
+    font-size: 24px;
+  }
+  .sidebar .main-nav,
+  .sidebar .user-nav {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.header {
+  display: none;
+}
+@media (max-width: 768px) {
+  .header {
+    display: block;
+    padding: 10px;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+.header .hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.header .hamburger span {
+  width: 100%;
+  height: 3px;
+  background: #0f1419;
+  transition: all 0.3s ease;
+}
+.header .hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.header .hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.header .hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .popup {
@@ -102,9 +220,17 @@
   cursor: pointer;
   transition: all 0.3s ease 0s;
   text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
   font-weight: bold;
   background-color: #0f1419;
   color: #fff;
+}
+@media (max-width: 768px) {
+  .popup .popup-content form button {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
 }
 .popup .popup-content form .form-field {
   text-align: center;
@@ -114,8 +240,54 @@
   margin: 2px 0 0 auto;
 }
 
-.main {
-  flex: 3;
+.tweets {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.tweets h1 {
+  margin-bottom: 10px;
+}
+.tweets .tweet-link {
+  text-decoration: none;
+  color: #0f1419;
+}
+@media (max-width: 768px) {
+  .tweets {
+    border: none;
+  }
+}
+
+.tweet {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.tweet p {
+  margin: 5px 0;
+}
+.tweet small {
+  color: #666;
+}
+.tweet .button {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #0f1419;
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .tweet .button {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
 }
 
 .tweet-menu {
@@ -135,67 +307,64 @@
   border-bottom: 2px solid #0f1419;
 }
 
-.create-form {
+.create-form,
+.edit-form {
   margin: 10px auto 5px;
   max-width: 400px;
 }
 .create-form input,
-.create-form textarea {
+.create-form textarea,
+.edit-form input,
+.edit-form textarea {
   width: 100%;
   border: 1px solid #0f1419;
   border-radius: 7px;
   resize: none;
   padding: 10px;
 }
-.create-form button {
+.create-form button,
+.edit-form button {
   border: none;
   border-radius: 30px;
   padding: 10px 30px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
   text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
   font-weight: bold;
   background-color: #0f1419;
   color: #fff;
 }
-.create-form .form-field {
+@media (max-width: 768px) {
+  .create-form button,
+  .edit-form button {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+}
+.create-form .form-field,
+.edit-form .form-field {
   text-align: center;
 }
-.create-form button {
+.create-form button,
+.edit-form button {
   display: block;
   margin: 2px 0 0 auto;
 }
 
-.form-error {
-  color: #ff0000;
-}
-
-.validation-errors .list-errors {
-  list-style: none;
-}
-.validation-errors .list-errors li {
-  color: #ff0000;
-}
-
-.tweets {
+.footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 0;
 }
-.tweets h1 {
-  margin-bottom: 10px;
-}
-.tweets .tweet {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-.tweets .tweet p {
-  margin: 5px 0;
-}
-.tweets .tweet small {
-  color: #666;
+@media (max-width: 768px) {
+  .footer {
+    padding: 10px 0;
+    font-size: 14px;
+  }
 }
 
 .no-content {
@@ -244,23 +413,24 @@
   cursor: pointer;
   transition: all 0.3s ease 0s;
   text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
   font-weight: bold;
   background-color: #0f1419;
   color: #fff;
 }
+@media (max-width: 768px) {
+  .login .login-form button,
+  .login .register-form button,
+  .register .login-form button,
+  .register .register-form button {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+}
 .login button,
 .register button {
   width: 100%;
-}
-
-.footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-.footer p {
-  margin: 15px auto 5px;
 }
 
 .error-page {
@@ -283,7 +453,33 @@
   cursor: pointer;
   transition: all 0.3s ease 0s;
   text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
   font-weight: bold;
   background-color: #0f1419;
   color: #fff;
+}
+@media (max-width: 768px) {
+  .error-page a {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+}
+
+.tweet-page {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.form-error {
+  color: #ff0000;
+}
+
+.validation-errors .list-errors {
+  list-style: none;
+}
+.validation-errors .list-errors li {
+  color: #ff0000;
 }

@@ -1,0 +1,13 @@
+@use '../variables';
+.footer {
+  border-top: 1px solid variables.$light-dark;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 0;
+
+  @media (max-width: 768px) {
+    padding: 10px 0;
+    font-size: variables.$font-size-mobile;
+  }
+}

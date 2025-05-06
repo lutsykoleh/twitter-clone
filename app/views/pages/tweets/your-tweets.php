@@ -12,11 +12,18 @@
     <div class="tweets">
       <h1>Your Tweets</h1>
       <?php foreach ($tweets as $tweet): ?>
-        <div class="tweet">
-          <p><strong><?php echo htmlspecialchars($tweet['username']); ?></strong> <small><?php echo $tweet['created_at']; ?></small></p>
-          <p><?php echo htmlspecialchars($tweet['content']); ?></p>
-        </div>
-      <?php endforeach; ?>
+        <a class="tweet-link" href="/tweet/<?php echo $tweet['id']; ?>">
+          <div class="tweet">
+            <p class="tweet-header"><strong><?php echo htmlspecialchars($tweet['username']); ?></strong> <small><?php echo $tweet['created_at']; ?></small></p>
+            <p class="tweet-content"><?php echo htmlspecialchars($tweet['content']); ?></p>
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $tweet['user_id']): ?>
+              <a class="button" href="/tweets/edit/<?php echo $tweet['id']; ?>">Edit</a>
+              <form action="/tweets/delete/<?php echo $tweet['id']; ?>" method="POST" style="display:inline;">
+                <button class="button" type="submit" onclick="return confirm('Are you sure you want to delete this tweet?');">Delete</button>
+              </form>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
     </div>
   <?php endif; ?>
 </section>

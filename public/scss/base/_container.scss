@@ -1,0 +1,41 @@
+@use '../variables';
+
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 20px auto;
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: 576px) {
+    padding: 0 10px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+
+.main {
+  flex: 3;
+
+  @media (max-width: 768px) {
+    margin-top: 26px;
+  }
+}

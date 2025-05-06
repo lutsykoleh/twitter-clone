@@ -1,0 +1,16 @@
+@use '../variables';
+@use '../mixin';
+
+.create-form,
+.edit-form {
+  margin: 10px auto 5px;
+  max-width: 400px;
+  @include mixin.form;
+  .form-field {
+    text-align: center;
+  }
+  button {
+    display: block;
+    margin: 2px 0 0 auto;
+  }
+}

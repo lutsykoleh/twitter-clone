@@ -51,6 +51,10 @@ class Router
   /**
    * Dispatches the request to the appropriate route handler.
    *
+   * This method takes the HTTP method and the URI of the request, and
+   * uses them to find the appropriate route handler. The handler is then
+   * called with the parameters extracted from the URI.
+   *
    * @param string $method The HTTP method of the request.
    * @param string $uri The URI of the request.
    * @return void
@@ -58,34 +62,42 @@ class Router
   public function dispatch(string $method, string $uri): void
   {
     $uri = trim(parse_url($uri, PHP_URL_PATH), '/');
+    $params = [];
 
-    if (isset($this->routes[$method][$uri])) {
-      $route = $this->routes[$method][$uri];
-      $handler = $route['handler'];
-      $middlewares = $route['middlewares'];
+    // Loop through all the registered routes for the given method.
+    foreach ($this->routes[$method] ?? [] as $routePath => $route) {
+      $pattern = preg_replace('#\{([a-zA-Z0-9_]+)\}#', '([a-zA-Z0-9_]+)', $routePath);
+      $pattern = "#^$pattern$#";
 
-      // Execute middlewares
-      foreach ($middlewares as $middleware) {
-        $middlewareInstance = new $middleware();
-        $middlewareInstance->handle();
+      if (preg_match($pattern, $uri, $matches)) {
+        array_shift($matches);
+        $params = $matches;
+
+        $handler = $route['handler'];
+        $middlewares = $route['middlewares'];
+
+        // Call any middlewares before calling the handler.
+        foreach ($middlewares as $middleware) {
+          $middlewareInstance = new $middleware();
+          $middlewareInstance->handle();
+        }
+
+        if (is_array($handler)) {
+          [$controller, $method] = $handler;
+          $controllerInstance = new $controller();
+          call_user_func_array([$controllerInstance, $method], $params);
+        } else {
+          call_user_func_array($handler, $params);
+        }
+        return;
       }
-
-      // Call the handler
-      if (is_array($handler)) {
-        [$controller, $method] = $handler;
-        $controllerInstance = new $controller();
-        $controllerInstance->$method();
-      } else {
-
-        call_user_func($handler);
-      }
-    } else {
-      // Return 404 if route not found
-      http_response_code(404);
-      $title = '404 - Page Not Found';
-      $content = __DIR__ . '/../views/errors/404.php';
-      include __DIR__ . '/../views/layouts/main.php';
     }
+
+    // If no route matches the request, then return a 404 error.
+    http_response_code(404);
+    $title = '404 - Page Not Found';
+    $content = __DIR__ . '/../views/errors/404.php';
+    include __DIR__ . '/../views/layouts/main.php';
   }
 
   /**
